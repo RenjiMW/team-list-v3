@@ -1,9 +1,10 @@
-import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
+import { Draggable, Droppable } from "@hello-pangea/dnd";
 import { usePlayers } from "../../hooks/usePlayers";
 import Button from "../button-components/Button";
 import ReadyPlayer from "../ReadyPlayer";
 import Approval from "../Approval";
 import { useState } from "react";
+import PlayerDetails from "../PlayerDetails";
 
 function AvailablePlayers({ addPlayer }) {
   const { availablePlayers, deletePlayer } = usePlayers();
@@ -23,7 +24,22 @@ function AvailablePlayers({ addPlayer }) {
     onCancel();
   };
 
+  const [viewDetails, setViewDetails] = useState({ open: false, player: null });
+  const handleViewDetails = (player) => setViewDetails({ open: true, player });
+  const handleCloseViewDetails = () =>
+    setViewDetails({ open: false, player: null });
+
   const visiblePlayersQty = visibleAvailable.length;
+
+  function getDraggingStyle(style, snapshot) {
+    if (!snapshot.isDragging) return style;
+    const base = style?.transform ?? "";
+    return {
+      ...style,
+      transform: `${base} scale(0.7)`,
+      transformOrigin: "center",
+    };
+  }
 
   return (
     <div className="w-md h-full text-center border-2 rounded-lg p-5">
@@ -32,10 +48,15 @@ function AvailablePlayers({ addPlayer }) {
         <span className="text-amber-200">[{visiblePlayersQty}]</span>
       </h1>
 
-      <div className="flex justify-center gap-5 my-4">
+      <div className="flex justify-center my-4">
         <Button onClick={addPlayer}>Add new player</Button>
-        <Button>Hide list</Button>
       </div>
+      {viewDetails.open && (
+        <PlayerDetails
+          player={viewDetails.player}
+          onCloseViewDetails={handleCloseViewDetails}
+        />
+      )}
 
       {confirm.open && (
         <Approval
@@ -47,7 +68,11 @@ function AvailablePlayers({ addPlayer }) {
 
       <Droppable droppableId="available-list" type="player">
         {(provided) => (
-          <ul ref={provided.innerRef} {...provided.droppableProps}>
+          <ul
+            ref={provided.innerRef}
+            {...provided.droppableProps}
+            className="flex flex-col items-center h-152 overflow-y-auto"
+          >
             {visibleAvailable.map((player, index) => (
               <Draggable key={player.id} draggableId={player.id} index={index}>
                 {(provided, snapshot) => (
@@ -55,11 +80,15 @@ function AvailablePlayers({ addPlayer }) {
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
+                    style={getDraggingStyle(
+                      provided.draggableProps.style,
+                      snapshot
+                    )}
                     className={[
-                      "selct-none",
+                      "select-none",
                       "cursor-grab",
                       snapshot.isDragging
-                        ? "opacity-80 ring-2 ring-blue-500"
+                        ? "opacity-80 ring-2 ring-blue-500 max-w-fit"
                         : "",
                     ].join(" ")}
                   >
@@ -67,6 +96,7 @@ function AvailablePlayers({ addPlayer }) {
                       player={player}
                       index={index}
                       onAskDelete={onAskDelete}
+                      onViewDetails={handleViewDetails}
                     />
                   </li>
                 )}

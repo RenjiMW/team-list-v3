@@ -1,29 +1,89 @@
 import { usePlayers } from "../hooks/usePlayers";
+import { useState } from "react";
 import SmallButton from "./button-components/SmallButton";
 
-function ReadyPlayer({ player, onAskDelete, index }) {
+function ReadyPlayer({ player, onAskDelete, onViewDetails }) {
   const { assignToSquad } = usePlayers();
   const { name, avatar } = player;
+  const [showStats, setShowStats] = useState(false);
+
+  const formatName = (name) => {
+    if (name.length > 10 && name.includes(" ")) {
+      const nameLenght = name.length;
+      const spaceIndex = name.indexOf(" ");
+      const firstPart = name.slice(0, spaceIndex);
+      const cutEnd = name.slice(spaceIndex + 1, nameLenght);
+      const letter = cutEnd.slice(0, 1);
+
+      return `${firstPart} ${letter}.`;
+    }
+    return name.length > 10 ? name.slice(0, 10) + "..." : name;
+  };
 
   return (
-    <div className="flex justify-between items-center w-80 h-16 border-2 rounded-lg bg-indigo-600 p-3">
-      <div className="w-10 h-10 bg-stone-400 text-black font-bold flex items-center justify-center">
-        <img src={avatar} />
-      </div>
+    <div className="flex flex-col border-2 rounded-lg bg-s2">
+      <div className="flex justify-between items-center w-80 min-h-14  px-2 ">
+        <div className="w-10 h-10 bg-stone-300 text-black font-bold flex items-center justify-center overflow-hidden">
+          <img
+            src={avatar}
+            className="object-cover object-top w-full h-full"
+            alt="avatar"
+          />
+        </div>
 
-      <h1 className="w-20">{name}</h1>
-      <p className="mr-2">
-        #<span className="font-bold text-xl">{index}</span>
-      </p>
-      <div className="flex gap-1">
-        <SmallButton>⚙</SmallButton>
-        <SmallButton player={player} onClick={() => onAskDelete(player)}>
-          ❌
-        </SmallButton>
-        <SmallButton onClick={() => assignToSquad(player.id, null)}>
-          ▶
-        </SmallButton>
+        <h1 className="w-25">{formatName(name)}</h1>
+        <div className="flex gap-1">
+          <SmallButton
+            onClick={() => {
+              onViewDetails(player);
+            }}
+          >
+            ⚙
+          </SmallButton>
+          <SmallButton
+            onClick={() => {
+              setShowStats((prev) => !prev);
+            }}
+          >
+            🔍
+          </SmallButton>
+          <SmallButton player={player} onClick={() => onAskDelete(player)}>
+            ❌
+          </SmallButton>
+          <SmallButton onClick={() => assignToSquad(player.id, null)}>
+            ▶
+          </SmallButton>
+        </div>
       </div>
+      {showStats && (
+        <div className="min-h-8 flex justify-around">
+          <div className="mr-3">
+            <span>⚖</span>
+            <span>{player.weight ? player.weight : " -- "}</span>
+            <span className="text-xs">kg</span>
+          </div>
+          <div className="mr-2">
+            <span>📏</span>
+            <span>{player.height ? player.height : " -- "}</span>
+            <span className="text-xs">cm</span>
+          </div>
+          <div className="mr-2">
+            <span>⌛</span>
+            <span>{player.age ? player.age : " -- "}</span>
+            <span className="text-xs">yo</span>
+          </div>
+          <div className="mr-2">
+            <span>⚔</span>
+            <span>{player.exp ? player.exp : " -- "}</span>
+            <span className="text-xs">mt.</span>
+          </div>
+          <div className="mr-1">
+            <span>📌</span>
+            <span>{player.pos ? player.pos : " -- "}</span>
+            <span className="text-xs"> #</span>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

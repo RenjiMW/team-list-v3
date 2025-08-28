@@ -5,9 +5,7 @@ import { Droppable, Draggable } from "@hello-pangea/dnd";
 
 function SquadList() {
   const { squadPlayers } = usePlayers();
-  console.log("squadPlayers", squadPlayers);
 
-  console.log("🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥");
   const currentSquadSize = squadPlayers.filter(
     (player) => player.occupantId
   ).length;
@@ -43,9 +41,7 @@ function SquadList() {
         Squad List <span className="text-amber-200">[{currentSquadSize}]</span>
       </h1>
 
-      <div className="my-4">
-        <Button>Hide list</Button>
-      </div>
+      <div className="my-16 "></div>
 
       <ul className="flex justify-around gap-5">
         <div className="w-1/2">

@@ -8,6 +8,7 @@ import { usePlayers } from "../hooks/usePlayers";
 
 function Lists() {
   const [addingPlayer, setAddingNewPlayer] = useState(false);
+
   const { assignToSquad, unassignFromSquad, squadPlayers, dispatch } =
     usePlayers();
 
@@ -23,9 +24,10 @@ function Lists() {
   /////////////////////////////////////////////////////////
   //////////////// D&D
   //
+
   function onDragEnd(result) {
     const { source, destination, draggableId } = result;
-    console.log("🟢 result: ", result);
+    // console.log("🟢 result: ", result);
 
     if (!destination) return;
 
@@ -69,7 +71,7 @@ function Lists() {
     // FIXME: te funckje dispatch powinne być zdefiniowane w PlayerContext
     // 3) Slot -> Slot : (opcjonalnie) swap
     if (fromSlot && toSlot) {
-      console.log(source.droppableId);
+      // console.log(source.droppableId);
       dispatch({
         type: "squad/swap",
         payload: {
@@ -94,7 +96,7 @@ function Lists() {
 
   return (
     <>
-      <div className="h-screen w-full  bg-sky-950 text-sky-50">
+      <div className="min-h-screen w-full  bg-sky-950 text-sky-50">
         {addingPlayer && <AddPlayer closeModal={handleCloseAddPlayer} />}
 
         <div>
@@ -112,66 +114,3 @@ function Lists() {
 }
 
 export default Lists;
-
-/*
- //////////////// D&D
-  function onDragEnd(result) {
-    const { source, destination, draggableId } = result;
-    if (!destination) return;
-
-    // nic się nie zmieniło
-    if (
-      source.droppableId === destination.droppableId &&
-      source.index === destination.index
-    )
-      return;
-
-    // ŹRÓDŁO i CEL
-    const fromAvail = source.droppableId === "available-list";
-    const toAvail = destination.droppableId === "available-list";
-    const fromSlot = source.droppableId.startsWith("slot-");
-    const toSlot = destination.droppableId.startsWith("slot-");
-
-    // playerId parsujemy z draggableId; ujednolicamy format "player-<id>"
-    const playerId = draggableId.replace(/^player-/, "");
-    const slotIdFrom = fromSlot
-      ? Number(source.droppableId.replace("slot-", ""))
-      : null;
-    const slotIdTo = toSlot
-      ? Number(destination.droppableId.replace("slot-", ""))
-      : null;
-
-    // 1) Available -> Slot : przypisz do slotu
-    if (fromAvail && toSlot) {
-      assignToSquad(playerId, slotIdTo);
-      return;
-    }
-
-    // 2) Slot -> Available : wyrzuć ze składu
-    if (fromSlot && toAvail) {
-      unassignFromSquad(slotIdFrom);
-      return;
-    }
-
-    // 3) Slot -> Slot : (opcjonalnie) swap
-    if (fromSlot && toSlot) {
-      dispatch({
-        type: "squad/swap",
-        payload: { fromSlotId: slotIdFrom, toSlotId: slotIdTo },
-      });
-      return;
-    }
-
-    // 4) Available -> Available : reorder widocznych
-    if (fromAvail && toAvail) {
-      dispatch({
-        type: "players/reorder",
-        from: source.index,
-        to: destination.index,
-      });
-      return;
-    }
-  }
-
-  //////////////// D&D
-*/

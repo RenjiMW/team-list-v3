@@ -3,6 +3,15 @@ import { getPositionName } from "../hooks/getPositionName";
 
 const PlayerContext = createContext();
 
+const avatarsArr = [
+  "../../public/avatars/1-avatar.png",
+  "../../public/avatars/2-avatar.png",
+  "../../public/avatars/3-avatar.png",
+  "../../public/avatars/4-avatar.png",
+  "../../public/avatars/5-avatar.png",
+  "../../public/avatars/6-avatar.png",
+];
+
 const makeEmptySlot = (slotId) => ({
   slotId,
   positionName: getPositionName(slotId),
@@ -33,27 +42,7 @@ function reducer(state, action) {
   switch (action.type) {
     // ======== creating players
     case "player/created": {
-      const incoming = action.payload;
-      const incomingName = normalize(incoming.name);
-
-      let incomingAvatar = incoming.avatar;
-      if (!incomingAvatar) {
-        incomingAvatar = `https://robohash.org/${normalize(
-          incoming.name
-        ).replace(/\s+/g, "")}.png`;
-      }
-
-      const exists = state.availablePlayers.some(
-        (p) => normalize(p.name) === incomingName
-      );
-      if (exists) return state;
-
-      const newPlayer = {
-        id: incoming.id,
-        name: incoming.name.trim(),
-        avatar: incomingAvatar,
-        inSquad: false,
-      };
+      const newPlayer = action.payload;
 
       const inSquadPlayers = state.availablePlayers.filter(
         (player) => player.inSquad === true
@@ -89,10 +78,10 @@ function reducer(state, action) {
     // DnD Action 🔱
     // ======== reordering players
     case "players/reorder": {
-      console.log("action.payload=", action.payload);
+      // console.log("action.payload=", action.payload);
       const { from, to } = action.payload;
       if (from === to) return state;
-      console.log(from, to);
+      // console.log(from, to);
 
       const next = [...state.availablePlayers];
       const [moved] = next.splice(from, 1);
@@ -207,9 +196,15 @@ function reducer(state, action) {
       return { ...state, squadPlayers: slots };
     }
 
-    // case "player/edit": {
-    //   return state;
-    // }
+    case "player/edit": {
+      const edited = action.payload;
+
+      const updatedPlayers = state.availablePlayers.map((player) =>
+        player.id === edited.id ? { ...player, ...edited } : player
+      );
+
+      return { ...state, availablePlayers: updatedPlayers };
+    }
 
     default:
       return state;
@@ -245,6 +240,23 @@ function PlayerProvider({ children }) {
     `${Date.now()}-${Math.random().toString(36).slice(2)}`;
 
   const createPlayer = (newPlayer) => {
+    let avatar;
+
+    if (newPlayer.avatarType === "pick") {
+      avatar = avatarsArr[newPlayer.avatarIdx];
+    } else if (newPlayer.avatarType === "default") {
+      avatar = avatarsArr[2];
+    } else if (newPlayer.avatarType === "urlAddress") {
+      avatar = newPlayer.avatarUrl;
+    }
+
+    const playerToAdd = {
+      id: genId(),
+      name: newPlayer.name.trim(),
+      avatar,
+      inSquad: false,
+    };
+
     const willDuplicate = state.availablePlayers.some(
       (p) => normalize(p.name) === normalize(newPlayer.name)
     );
@@ -252,8 +264,8 @@ function PlayerProvider({ children }) {
       return { ok: false, reason: "exists" };
     }
 
-    const id = genId();
-    dispatch({ type: "player/created", payload: { ...newPlayer, id } });
+    // const id = genId();
+    dispatch({ type: "player/created", payload: playerToAdd });
     return { ok: true };
   };
 
@@ -267,6 +279,25 @@ function PlayerProvider({ children }) {
   // KICK FROM SQUAD
   const unassignFromSquad = (slotId, destinationIndex) => {
     dispatch({ type: "squad/unassign", payload: { slotId, destinationIndex } });
+  };
+
+  ///////////////////////////////////////
+  // EditPlayer
+  const editPlayer = (editedPlayer) => {
+    const otherPlayersNames = state.availablePlayers.filter(
+      (player) => player.id !== editedPlayer.id
+    );
+
+    const willDuplicate = otherPlayersNames.some(
+      (player) => normalize(player.name) === normalize(editedPlayer.name)
+    );
+
+    if (willDuplicate) {
+      return { ok: false, reason: "exists" };
+    }
+
+    dispatch({ type: "player/edit", payload: editedPlayer });
+    return { ok: true };
   };
 
   ///////////////////////////////////////
@@ -284,6 +315,8 @@ function PlayerProvider({ children }) {
         dispatch,
         assignToSquad,
         unassignFromSquad,
+        editPlayer,
+        avatarsArr,
       }}
     >
       {children}

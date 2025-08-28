@@ -1,1 +1,77 @@
 @import "tailwindcss";
+
+@theme {
+  --color-midnight: #121063;
+  --color-tahiti: #3ab7bf;
+  --color-bermuda: #78dcca;
+
+  /* */
+  --color-laguna: #076f8f;
+  --color-originalsky: #052f4a;
+  --color-leaf: #a3bb9e;
+  --color-sand: #fce8c0;
+  --color-tomato: #db4a25;
+
+  /* */
+  --color-laguna2: #0d2032;
+  --color-laguna22: #052f4a;
+  --color-leaf2: #306479;
+  --color-sand2: #8a8b61;
+  --color-tomato2: #fbe076;
+
+  /* sunset */
+  --color-s1: #102e49;
+  --color-s2: #34679f;
+  --color-s3: #7384ad;
+  --color-s4: #6e8ba0;
+  --color-s5: #b1825e;
+
+  /* sunset-2 */
+  --color-s21: #4b4f5a;
+  --color-s22: #122e4a;
+  --color-s23: #335f97;
+  --color-s24: #5a86af;
+  --color-s25: #c8a995;
+
+  /* flowers */
+  --color-f1: #183348;
+  --color-f2: #4e608e;
+  --color-f3: #998686;
+  --color-f4: #a88f8c;
+  --color-f5: #aa502a;
+
+  /* flowers-2 */
+  --color-f21: #499b8b;
+  --color-f22: #1a3740;
+  --color-f23: #4e5d5d;
+  --color-f24: #928b69;
+  --color-f25: #c0523d;
+
+  /* pokemon */
+  --color-p1: #132f46;
+  --color-p2: #0f0f0f;
+  --color-p3: #ab395f;
+  --color-p4: #b74b73;
+  --color-p5: #e6e8ee;
+
+  /* pokemon-2 */
+  --color-p21: #070a0b;
+  --color-p22: #163148;
+  --color-p23: #5a377d;
+  --color-p24: #bc3a63;
+  --color-p25: #e7e6db;
+
+  /* Artist */
+  --color-a1: #0f2f47;
+  --color-a2: #6373b0;
+  --color-a3: #b5a6a2;
+  --color-a4: #ad802f;
+  --color-a5: #b23924;
+
+  /* Artist2 */
+  --color-a21: #825c96;
+  --color-a22: #1e3156;
+  --color-a23: #4f6670;
+  --color-a24: #8e7153;
+  --color-a25: #cd9e35;
+}
