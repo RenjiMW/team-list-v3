@@ -36,15 +36,15 @@ function SquadList() {
   /////////////////////////////////////////
   /// JSX return
   return (
-    <div className="w-2xl h-full text-center border-2 rounded-lg p-5">
+    <div className="max-w-md lg:max-w-2xl min-h-[748px] text-center border-2 rounded-lg p-5 m-3 lg:m-0">
       <h1 className="font-bold text-2xl">
         Squad List <span className="text-amber-200">[{currentSquadSize}]</span>
       </h1>
 
       <div className="my-16 "></div>
 
-      <ul className="flex justify-around gap-5">
-        <div className="w-1/2">
+      <ul className="flex flex-col lg:flex-row justify-around lg:gap-2 xl:gap-5">
+        <div className="w-80 lg:w-70">
           <div className="mb-4">
             {firstRow.map((slot, index) => (
               <Slot slot={slot} key={slot.slotId} index={index} />
@@ -76,7 +76,7 @@ function SquadList() {
           </div>
         </div>
 
-        <div className="w-1/2">
+        <div className="w-80 lg:w-70">
           <div className="mb-14">
             {wingers.map((slot, index) => (
               <Slot slot={slot} key={slot.slotId} index={index} />
