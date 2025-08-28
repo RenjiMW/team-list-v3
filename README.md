@@ -32,7 +32,7 @@ The app allows users to:
 
 ```bash
 # Clone repository
-git clone https://github.com/<your-username>/squad-builder.git
+git clone https://github.com/RenjiMW/team-list-v3.git
 
 # Navigate to project
 cd squad-builder
