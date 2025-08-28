@@ -1,4 +1,4 @@
-# 📘 Squad Builder — Technical Documentation
+# 📘 Squad Builder — Simple Rugby Team Manager
 
 ## 📋 Overview
 
@@ -17,7 +17,6 @@ The app allows users to:
 - **Frontend:** React, Vite, Tailwind CSS
 - **State management:** React Context API + Reducer
 - **Drag & Drop:** `@hello-pangea/dnd`
-- **Backend (future scope):** Node.js + Express + MongoDB Atlas + Passport.js
 - **Storage (current implementation):** Browser `localStorage`
 
 ---
