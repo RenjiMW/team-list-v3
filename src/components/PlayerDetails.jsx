@@ -22,7 +22,7 @@ function PlayerDetails({ player, onCloseViewDetails }) {
         <EditPlayer player={updatedPlayer} onCloseEdit={handelCloseEdit} />
       )}
       {!edit.open && (
-        <div className="relative border-2 text-left size-max  bg-sky-950 px-8 pt-8 pb-7 rounded-2xl">
+        <div className="relative border-2 text-left size-max bg-sky-950 px-2 xxs:px-4 md:px-8 pt-8 pb-7 rounded-2xl">
           <div className="flex justify-center mb-3 ">
             <div className="border-2 rounded-lg size-20">
               <img
@@ -31,47 +31,47 @@ function PlayerDetails({ player, onCloseViewDetails }) {
                 className="object-cover object-top w-full h-full"
               />
             </div>
-            <div className="min-w-40 flex items-center justify-center">
+            <div className="xs:min-w-40 ml-2 xs:ml-5 flex items-center justify-center">
               <span className="font-bold text-2xl">{updatedPlayer.name}</span>
             </div>
           </div>
 
-          <div className="flex justify-between">
-            <div className="min-w-45">
+          <div className="xs:flex justify-between">
+            <div className="xs:min-w-45">
               <span>⚖ Weight:</span>{" "}
               <span>{updatedPlayer.weight ? updatedPlayer.weight : "--"}</span>
             </div>
 
-            <div className="min-w-45">
+            <div className="xs:min-w-45">
               <span>📏 Height:</span>{" "}
               <span>{updatedPlayer.height ? updatedPlayer.height : "--"}</span>
             </div>
           </div>
 
-          <div className="flex justify-between">
-            <div className="min-w-45">
+          <div className="xs:flex justify-between">
+            <div className="xs:min-w-45">
               <span>⌛ Age:</span>{" "}
               <span>{updatedPlayer.age ? updatedPlayer.age : "--"}</span>
             </div>
 
-            <div className="min-w-45">
+            <div className="xs:min-w-45">
               <span>⚔ Expirience:</span>{" "}
               <span>{updatedPlayer.exp ? updatedPlayer.exp : "--"}</span>
             </div>
           </div>
 
-          <div className="flex justify-between">
-            <div className="min-w-45">
+          <div className="xs:flex justify-between">
+            <div className="xs:min-w-45">
               <span>📌 Position:</span>{" "}
               <span>{updatedPlayer.pos ? updatedPlayer.pos : "--"}</span>
             </div>
 
-            <div className="min-w-45">
+            <div className="xs:min-w-45">
               <span>💱 Alt. pos.:</span>{" "}
               <span>{updatedPlayer.altPos ? updatedPlayer.altPos : "--"}</span>
             </div>
           </div>
-          <div className="flex justify-center gap-10 pt-5">
+          <div className="flex justify-center gap-4 xs:gap-10 pt-5">
             <Button
               onClick={() => {
                 handleOpenEdit(updatedPlayer);

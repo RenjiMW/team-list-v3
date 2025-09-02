@@ -1,11 +1,21 @@
 import { usePlayers } from "../hooks/usePlayers";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SmallButton from "./button-components/SmallButton";
+import { useWindowWidth } from "../hooks/useWindowWidth";
 
 function ReadyPlayer({ player, onAskDelete, onViewDetails }) {
   const { assignToSquad } = usePlayers();
   const { name, avatar } = player;
   const [showStats, setShowStats] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const width = useWindowWidth();
+  const notMobile = width >= 480;
+
+  useEffect(() => {
+    if (notMobile && isOpen) {
+      setIsOpen(false);
+    }
+  }, [notMobile, isOpen]);
 
   const formatName = (name) => {
     if (name.length > 10 && name.includes(" ")) {
@@ -21,8 +31,8 @@ function ReadyPlayer({ player, onAskDelete, onViewDetails }) {
   };
 
   return (
-    <div className="flex flex-col border-2 rounded-lg bg-s2">
-      <div className="flex justify-between items-center w-80 min-h-14  px-2 ">
+    <div className="flex flex-col border-2 rounded-lg bg-s2 ">
+      <div className="relative flex justify-between items-center xxs:w-[236px] xs:w-80 min-h-14  px-2 ">
         <div className="w-10 h-10 bg-stone-300 text-black font-bold flex items-center justify-center overflow-hidden">
           <img
             src={avatar}
@@ -32,7 +42,8 @@ function ReadyPlayer({ player, onAskDelete, onViewDetails }) {
         </div>
 
         <h1 className="w-25">{formatName(name)}</h1>
-        <div className="flex gap-1">
+
+        <div className="hidden xs:flex gap-1">
           <SmallButton
             onClick={() => {
               onViewDetails(player);
@@ -54,30 +65,70 @@ function ReadyPlayer({ player, onAskDelete, onViewDetails }) {
             ▶
           </SmallButton>
         </div>
+
+        <div className="xs:hidden">
+          <SmallButton onClick={() => setIsOpen(!isOpen)}>
+            {isOpen ? "↩" : "➕"}
+          </SmallButton>
+        </div>
+
+        {isOpen && (
+          <div className="xs:hidden absolute  right-11 grid grid-cols-2 gap-0.5">
+            <SmallButton
+              onClick={() => {
+                onViewDetails(player), setIsOpen(false);
+              }}
+            >
+              ⚙
+            </SmallButton>
+            <SmallButton
+              onClick={() => {
+                setShowStats((prev) => !prev), setIsOpen(false);
+              }}
+            >
+              🔍
+            </SmallButton>
+            <SmallButton
+              player={player}
+              onClick={() => {
+                onAskDelete(player), setIsOpen(false);
+              }}
+            >
+              ❌
+            </SmallButton>
+            <SmallButton
+              onClick={() => {
+                assignToSquad(player.id, null), setIsOpen(false);
+              }}
+            >
+              ▶
+            </SmallButton>
+          </div>
+        )}
       </div>
       {showStats && (
-        <div className="min-h-8 flex justify-around">
-          <div className="mr-3">
+        <div className="min-h-8 grid grid-cols-4 xs:flex justify-around">
+          <div className="col-span-2 mr-3">
             <span>⚖</span>
             <span>{player.weight ? player.weight : " -- "}</span>
             <span className="text-xs">kg</span>
           </div>
-          <div className="mr-2">
+          <div className="col-span-2 mr-2">
             <span>📏</span>
             <span>{player.height ? player.height : " -- "}</span>
             <span className="text-xs">cm</span>
           </div>
-          <div className="mr-2">
+          <div className="col-span-2 mr-2">
             <span>⌛</span>
             <span>{player.age ? player.age : " -- "}</span>
             <span className="text-xs">yo</span>
           </div>
-          <div className="mr-2">
+          <div className="col-span-2 mr-2">
             <span>⚔</span>
             <span>{player.exp ? player.exp : " -- "}</span>
             <span className="text-xs">mt.</span>
           </div>
-          <div className="mr-1">
+          <div className="col-span-4 mr-1">
             <span>📌</span>
             <span>{player.pos ? player.pos : " -- "}</span>
             <span className="text-xs"> #</span>

@@ -2,6 +2,7 @@
 
 @theme {
   --breakpoint-xs: 30rem;
+  --breakpoint-xxs: 20rem;
 
   --color-midnight: #121063;
   --color-tahiti: #3ab7bf;

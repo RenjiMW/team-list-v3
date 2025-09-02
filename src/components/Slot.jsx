@@ -21,20 +21,13 @@ function Slot({ slot }) {
     return name.length > 10 ? name.slice(0, 10) + "..." : name;
   };
 
-  // if (occupantId) {
-  //   console.log("occupantId", occupantId);
-  //   console.log("playerInAvailList", player);
-  // }
-
   const baseStyles =
-    "flex justify-between items-center w-full h-11 border-2 rounded-lg";
+    "flex justify-between items-center w-47.5 xxs:w-60 xs:w-80 lg:w-70 xl:w-80 h-11 border-2 rounded-lg";
 
   return (
     <>
       <Droppable droppableId={slot.slotId} type="player">
         {(provided, snapshot) => {
-          // const hideContent = snapshot.isDraggingOver && !occupantId;
-
           return (
             <div
               ref={provided.innerRef}
@@ -56,20 +49,26 @@ function Slot({ slot }) {
                       ref={provided.innerRef}
                     >
                       <div className="flex justify-start items-center w-full">
-                        <span className="block ml-3.5 w-8 text-center font-bold">
+                        {/*number*/}
+                        <span className="block xxs:ml-2 xs:ml-3.5 w-8 text-center font-bold">
                           {slot.slotId.slice(5)}
                         </span>
-                        <div className="size-8 ml-3  bg-stone-300 ">
+
+                        {/*avatar*/}
+                        <div className="size-8 xxs:ml-2 xs:ml-3  bg-stone-300 ">
                           <img
                             className="object-cover object-top w-full h-full"
                             src={player.avatar}
                             alt=""
                           />
                         </div>
-                        <span className="w-25 ml-3">
+
+                        {/*imie*/}
+                        <span className="w-15 xs:w-25 xxs:ml-2 xs:ml-3 overflow-hidden">
                           {formatName(player.name)}
                         </span>
                       </div>
+
                       <SmallButton
                         onClick={() => unassignFromSquad(slot.slotId)}
                       >

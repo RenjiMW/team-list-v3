@@ -36,54 +36,53 @@ function SquadList() {
   /////////////////////////////////////////
   /// JSX return
   return (
-    <div className="max-w-md lg:max-w-2xl min-h-[748px] text-center border-2 rounded-lg p-5 m-3 lg:m-0">
-      <h1 className="font-bold text-2xl">
-        Squad List <span className="text-amber-200">[{currentSquadSize}]</span>
+    <div className="w-full xxs:w-auto max-w-md lg:max-w-min min-h-[748px] text-center border-2 rounded-lg p-5 m-3 lg:m-0">
+      <h1 className="font-bold text-2xl mb-5 md-mb-19">
+        Squad List{" "}
+        <span className="text-amber-200">[{currentSquadSize}/23]</span>
       </h1>
 
-      <div className="my-16 "></div>
-
       <ul className="flex flex-col lg:flex-row justify-around lg:gap-2 xl:gap-5">
-        <div className="w-80 lg:w-70">
-          <div className="mb-4">
+        <div>
+          <div className="mb-4 flex flex-col items-center">
             {firstRow.map((slot, index) => (
               <Slot slot={slot} key={slot.slotId} index={index} />
             ))}
           </div>
 
-          <div className="mb-4">
+          <div className="mb-4 flex flex-col items-center">
             {secondRow.map((slot, index) => (
               <Slot slot={slot} key={slot.slotId} index={index} />
             ))}
           </div>
 
-          <div className="mb-4">
+          <div className="mb-4 flex flex-col items-center">
             {thirdRow.map((slot, index) => (
               <Slot slot={slot} key={slot.slotId} index={index} />
             ))}
           </div>
 
-          <div className="mb-4">
+          <div className="mb-4 flex flex-col items-center">
             {number9and10.map((slot, index) => (
               <Slot slot={slot} key={slot.slotId} index={index} />
             ))}
           </div>
 
-          <div className="mb-4">
+          <div className="mb-4 flex flex-col items-center">
             {centers.map((slot, index) => (
               <Slot slot={slot} key={slot.slotId} index={index} />
             ))}
           </div>
         </div>
 
-        <div className="w-80 lg:w-70">
-          <div className="mb-14">
+        <div>
+          <div className="mb-14 flex flex-col items-center">
             {wingers.map((slot, index) => (
               <Slot slot={slot} key={slot.slotId} index={index} />
             ))}
           </div>
 
-          <div className="mb-4">
+          <div className="mb-4 flex flex-col items-center">
             {replacements.map((slot, index) => (
               <Slot slot={slot} key={slot.slotId} index={index} />
             ))}

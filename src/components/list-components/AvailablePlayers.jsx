@@ -42,7 +42,7 @@ function AvailablePlayers({ addPlayer }) {
   }
 
   return (
-    <div className="max-w-md md:min-h-[748px] text-center border-2 rounded-lg p-5 m-3 lg:m-0">
+    <div className="w-full xxs:w-[284px] xs:w-auto max-w-md md:min-h-[748px] text-center border-2 rounded-lg p-5 m-3 lg:m-0">
       <h1 className="font-bold text-2xl">
         Available players{" "}
         <span className="text-amber-200">[{visiblePlayersQty}]</span>
@@ -71,7 +71,7 @@ function AvailablePlayers({ addPlayer }) {
           <ul
             ref={provided.innerRef}
             {...provided.droppableProps}
-            className="flex flex-col items-center min-h-30 lg:h-full overflow-y-auto"
+            className="flex flex-col xs:min-w-[324px] gap-0.5 items-center min-h-30 lg:h-full overflow-y-auto py-2"
           >
             {visibleAvailable.map((player, index) => (
               <Draggable key={player.id} draggableId={player.id} index={index}>

@@ -3,37 +3,59 @@ import { usePlayers } from "../hooks/usePlayers";
 function FieldList({ handleMouseEnter, handleMouseLeave, highlightPlayer }) {
   const { squadPlayers } = usePlayers();
 
-  const initialSquad = squadPlayers.filter((player, index) => index < 15);
+  // const initialSquad = squadPlayers.filter((player, index) => index < 15);
+  const initialSquadUntil8 = squadPlayers.filter((player, index) => index < 8);
+  const initialSquadFrom9 = squadPlayers.filter(
+    (player, index) => index > 7 && index < 15
+  );
   const replacements = squadPlayers.filter((player, index) => index >= 15);
 
   return (
-    <div>
-      <ul className="flex lg:flex-row flex-col mt-8 lg:mt-4 lg:items-baseline">
-        <div className="min-w-50">
+    <>
+      <div className="min-w-50 flex flex-col sm:mt-8 mb-8 lg:items-baseline ">
+        <div className="w-full p-5 rounded-2xl border border-slate-200/70 dark:border-slate-700/70 bg-white/60 dark:bg-slate-900/60 shadow-sm">
           <h3 className="font-bold text-lg">Initaial squad</h3>
-          {initialSquad.map((squadPlayer, index) => (
-            <FieldListItem
-              id={squadPlayer.occupantId}
-              key={index}
-              number={index + 1}
-              handleMouseEnter={handleMouseEnter}
-              handleMouseLeave={handleMouseLeave}
-              highlightPlayer={highlightPlayer}
-            />
-          ))}
+          <ul className="flex sm:flex-col gap-10 sm:gap-0">
+            <div>
+              {initialSquadUntil8.map((squadPlayer, index) => (
+                <FieldListItem
+                  id={squadPlayer.occupantId}
+                  key={index}
+                  number={index + 1}
+                  handleMouseEnter={handleMouseEnter}
+                  handleMouseLeave={handleMouseLeave}
+                  highlightPlayer={highlightPlayer}
+                />
+              ))}
+            </div>
+            <div>
+              {initialSquadFrom9.map((squadPlayer, index) => (
+                <FieldListItem
+                  id={squadPlayer.occupantId}
+                  key={index}
+                  number={index + 9}
+                  handleMouseEnter={handleMouseEnter}
+                  handleMouseLeave={handleMouseLeave}
+                  highlightPlayer={highlightPlayer}
+                />
+              ))}
+            </div>
+          </ul>
         </div>
-        <div className="mt-5 min-w-50">
+        <div className="mt-2 w-full p-5 rounded-2xl border border-slate-200/70 dark:border-slate-700/70 bg-white/60 dark:bg-slate-900/60 shadow-sm">
           <h3 className="font-bold text-lg">Replacements</h3>
-          {replacements.map((squadPlayer, index) => (
-            <FieldListItem
-              id={squadPlayer.occupantId}
-              key={index}
-              number={squadPlayer.slotId.slice(5)}
-            />
-          ))}
+          <ul className="grid grid-cols-2 sm:flex sm:flex-col">
+            {replacements.map((squadPlayer, index) => (
+              <FieldListItem
+                id={squadPlayer.occupantId}
+                key={index}
+                number={squadPlayer.slotId.slice(5)}
+              />
+            ))}
+          </ul>
         </div>
-      </ul>
-    </div>
+      </div>
+    </>
   );
 }
 
