@@ -16,11 +16,11 @@ const PlayerContext = createContext();
 // for prod mode
 const avatarsArr = [
   "/avatars/1-avatar.png",
-  "/public/avatars/2-avatar.png",
-  "/public/avatars/3-avatar.png",
-  "/public/avatars/4-avatar.png",
-  "/public/avatars/5-avatar.png",
-  "/public/avatars/6-avatar.png",
+  "/avatars/2-avatar.png",
+  "/avatars/3-avatar.png",
+  "/avatars/4-avatar.png",
+  "/avatars/5-avatar.png",
+  "//avatars/6-avatar.png",
 ];
 
 const makeEmptySlot = (slotId) => ({
