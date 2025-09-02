@@ -41,8 +41,10 @@ function AvailablePlayers({ addPlayer }) {
     };
   }
 
+  //xxs:w-[284px]
+
   return (
-    <div className="w-full xxs:w-[284px] xs:w-auto max-w-md md:min-h-[748px] text-center border-2 rounded-lg p-5 m-3 lg:m-0">
+    <div className="w-full max-w-md md:min-h-[748px] text-center border-2 rounded-lg p-5 m-3 lg:m-0">
       <h1 className="font-bold text-2xl">
         Available players{" "}
         <span className="text-amber-200">[{visiblePlayersQty}]</span>
@@ -87,8 +89,11 @@ function AvailablePlayers({ addPlayer }) {
                     className={[
                       "select-none",
                       "cursor-grab",
+                      "w-full",
+                      "flex",
+                      "justify-center",
                       snapshot.isDragging
-                        ? "opacity-80 ring-2 ring-blue-500 max-w-fit"
+                        ? "opacity-80 ring-2 ring-blue-500 rounded-lg max-w-fit"
                         : "",
                     ].join(" ")}
                   >

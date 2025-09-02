@@ -40,7 +40,7 @@ function Nav() {
 
       {/* Dropdown menu mobile */}
       {isOpen && (
-        <section className="absolute top-16 right-0 w-fit bg-slate-800 flex flex-col items-center p-4 gap-3 border-2 border-t-0 border-r-0 border-sky-600 xs:hidden rounded-bl-lg  shadow-lg">
+        <section className="absolute z-100 top-16 right-0 w-fit bg-slate-800 flex flex-col items-center p-4 gap-3 border-2 border-t-0 border-r-0 border-sky-600 xs:hidden rounded-bl-lg shadow-lg">
           <Button onClick={() => setIsOpen(false)} className="w-[120px]">
             <Link to="/lists">Lists</Link>
           </Button>

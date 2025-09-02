@@ -9,20 +9,25 @@ function Slot({ slot }) {
   const player = availablePlayers.find((player) => player.id === occupantId);
 
   const formatName = (name) => {
-    if (name.length > 10 && name.includes(" ")) {
-      const nameLenght = name.length;
-      const spaceIndex = name.indexOf(" ");
-      const firstPart = name.slice(0, spaceIndex);
+    const nameLenght = name.length;
+    const spaceIndex = name.indexOf(" ");
+    const firstPart = name.slice(0, spaceIndex);
+
+    if (firstPart.length > 10 && spaceIndex !== -1) {
+      const onlyPart = firstPart.slice(0, 10) + "...";
+      return `${onlyPart}`;
+    } else if (nameLenght > 10 && name.includes(" ")) {
       const cutEnd = name.slice(spaceIndex + 1, nameLenght);
       const letter = cutEnd.slice(0, 1);
 
       return `${firstPart} ${letter}.`;
+    } else {
+      return nameLenght > 10 ? name.slice(0, 10) + "..." : name;
     }
-    return name.length > 10 ? name.slice(0, 10) + "..." : name;
   };
 
   const baseStyles =
-    "flex justify-between items-center w-47.5 xxs:w-60 xs:w-80 lg:w-70 xl:w-80 h-11 border-2 rounded-lg";
+    "flex justify-between items-center w-47.5 w-full xs:w-80 lg:w-70 xl:w-80 h-11 border-2 rounded-lg";
 
   return (
     <>
@@ -64,7 +69,7 @@ function Slot({ slot }) {
                         </div>
 
                         {/*imie*/}
-                        <span className="w-15 xs:w-25 xxs:ml-2 xs:ml-3 overflow-hidden">
+                        <span className="max-w-25 xxs:ml-2 xs:ml-3 overflow-hidden">
                           {formatName(player.name)}
                         </span>
                       </div>

@@ -4,12 +4,11 @@ import { usePlayers } from "../hooks/usePlayers";
 ///////////////////////////////////////////////
 /// AddPlayer function
 function AddPlayer({ closeModal }) {
-  const { avatarsArr } = usePlayers();
+  const { avatarsArr, createPlayer } = usePlayers();
   const [name, setName] = useState("");
   const [avatarUrl, setAvatarUrl] = useState("");
   const [selectedOption, setSelectedOption] = useState("default");
   const [selectedAvatar, setSelectedAvatar] = useState(false);
-  const { createPlayer } = usePlayers();
   const [error, setError] = useState("");
 
   function handleSelectedOption(value) {
@@ -24,7 +23,7 @@ function AddPlayer({ closeModal }) {
   function handleSubmit(e) {
     e.preventDefault();
     if (!name) {
-      setError("Podaj imię");
+      setError("Pleasenter the name");
       return;
     }
 
@@ -44,7 +43,7 @@ function AddPlayer({ closeModal }) {
     const result = createPlayer(newPlayer);
 
     if (!result.ok) {
-      setError("Taki zawodnik już jest na liście.");
+      setError("Such a player is already on the list.");
     } else if (result.ok) {
       setError("");
       setName("");
@@ -56,35 +55,35 @@ function AddPlayer({ closeModal }) {
   /////////// =========== JSX
   return (
     <>
-      <div className="absolute z-10 flex items-center justify-center h-screen w-full bg-black/50">
-        <div className="relative border-2 rounded-2xl text-left size-max  bg-sky-950 px-6 py-5">
+      <div className="absolute z-10 flex items-center justify-center h-screen w-full  bg-black/50">
+        <div className="relative border-2 rounded-2xl text-left w-full xs:w-md m-4 bg-sky-950 px-6 py-5">
           <h1 className="font-bold text-lg text-center mb-3">
             Add a new player
           </h1>
 
           <form onSubmit={handleSubmit}>
-            <div className="flex flex-col items-end justify-center">
+            <div className="flex flex-col justify-center">
               {/* ================= NAME INPUT FIELD ================= */}
-              <div className="mr-[20%]">
+              <div className="flex flex-col xs:flex-row xs:justify-center">
                 <label htmlFor="name">Name :</label>
                 <input
                   id="name"
                   type="text"
-                  className="bg-amber-50 ml-1.5 text-black px-1.5"
+                  className="bg-amber-50 xs:ml-1.5 text-black px-1.5"
                   onChange={(e) => setName(e.target.value)}
                   value={name}
                 ></input>
               </div>
 
               {/* ================= DROPDOWN MENU ================= */}
-              <div className="mr-[20%] my-3">
+              <div className="flex flex-col xs:flex-row xs:justify-center my-3">
                 <label htmlFor="avatar">Avatar :</label>
                 <select
                   id="avatar"
                   value={selectedOption}
                   onChange={(e) => handleSelectedOption(e.target.value)}
-                  className="bg-white text-black rounded-l min-w-48
-                 ml-1.5"
+                  className="bg-white text-black rounded-l xs:min-w-48
+                 xs:ml-1.5"
                 >
                   <option value="default">Default avatar</option>
                   <option value="pick">Pick avatar</option>
@@ -93,9 +92,9 @@ function AddPlayer({ closeModal }) {
               </div>
 
               {/* ================= IMG SELECTION ================= */}
-              <div className="w-100 flex justify-center">
+              <div className="max-w-100 flex justify-center">
                 {selectedOption === "pick" && (
-                  <div className="flex flex-wrap justify-center gap-2 w-50 min-h-min pb-5 pt-2">
+                  <div className="flex flex-wrap justify-center gap-2 max-w-50 min-h-min pb-5 pt-2">
                     {avatarsArr.map((img, idx) => (
                       <button
                         key={idx}
@@ -164,3 +163,8 @@ function AddPlayer({ closeModal }) {
 }
 
 export default AddPlayer;
+
+/*
+
+
+*/

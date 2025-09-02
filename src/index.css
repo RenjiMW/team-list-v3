@@ -1,8 +1,17 @@
 @import "tailwindcss";
 
+html {
+  font-size: 16px; /* 1rem = 16px */
+}
+
 @theme {
-  --breakpoint-xs: 30rem;
-  --breakpoint-xxs: 20rem;
+  --breakpoint-xxs: 20rem; /* 320px */
+  --breakpoint-xs: 30rem; /* 480px */
+  /* --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px; */
 
   --color-midnight: #121063;
   --color-tahiti: #3ab7bf;

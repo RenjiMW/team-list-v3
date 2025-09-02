@@ -5,29 +5,29 @@ function AppDescription() {
       <p>This is a simple rugby squad builder. You can use it to:</p>
       <ul className="list-disc pl-7">
         <li className="mt-1 ">
-          <spam className="font-bold">Add a new player</spam> - enter the
+          <span className="font-bold">Add a new player</span> - enter the
           player's name and (optionally) provide an image URL to use as their
           avatar.
         </li>
         <li className="mt-1">
-          <spam className="font-bold">Reorder players on the list</spam> - grab
+          <span className="font-bold">Reorder players on the list</span> - grab
           a player with your mouse and drag them to the desired position.
         </li>
         <li className="mt-1">
-          <spam className="font-bold">Set up your match squad</spam> - drag a
+          <span className="font-bold">Set up your match squad</span> - drag a
           player onto a chosen position (whether empty or already occupied) or
           just move player to match squad using a button.
         </li>
         <li className="mt-1">
-          <spam className="font-bold">Swap players</spam> - drag one player onto
+          <span className="font-bold">Swap players</span> - drag one player onto
           another to switch their positions.
         </li>
         <li className="mt-1">
-          <spam className="font-bold">Remove players from the squad</spam> with
+          <span className="font-bold">Remove players from the squad</span> with
           a single click or
         </li>
         <li className="mt-1">
-          <spam className="font-bold">Completely delete a player</spam> from the
+          <span className="font-bold">Completely delete a player</span> from the
           app if they're no longer needed.
         </li>
       </ul>

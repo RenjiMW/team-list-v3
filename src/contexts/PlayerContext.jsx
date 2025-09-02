@@ -20,7 +20,7 @@ const avatarsArr = [
   "/avatars/3-avatar.png",
   "/avatars/4-avatar.png",
   "/avatars/5-avatar.png",
-  "//avatars/6-avatar.png",
+  "/avatars/6-avatar.png",
 ];
 
 const makeEmptySlot = (slotId) => ({

@@ -36,7 +36,7 @@ function SquadList() {
   /////////////////////////////////////////
   /// JSX return
   return (
-    <div className="w-full xxs:w-auto max-w-md lg:max-w-min min-h-[748px] text-center border-2 rounded-lg p-5 m-3 lg:m-0">
+    <div className="w-full max-w-md lg:max-w-min min-h-[748px] text-center border-2 rounded-lg p-5 m-3 lg:m-0">
       <h1 className="font-bold text-2xl mb-5 md-mb-19">
         Squad List{" "}
         <span className="text-amber-200">[{currentSquadSize}/23]</span>

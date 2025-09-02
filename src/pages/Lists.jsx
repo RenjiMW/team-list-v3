@@ -102,7 +102,7 @@ function Lists() {
         <div>
           <Nav />
           <DragDropContext onDragEnd={onDragEnd}>
-            <div className="flex flex-col md:flex-row justify-center items-center md:items-start lg:gap-3 xl:gap-12 py-8">
+            <div className="flex flex-col md:flex-row justify-center items-center md:items-start lg:gap-3 xl:gap-12 py-8 px-4 xs:px-0">
               <AvailablePlayers addPlayer={handleAddPlayer} />
               <SquadList />
             </div>
