@@ -3,13 +3,24 @@ import { getPositionName } from "../hooks/getPositionName";
 
 const PlayerContext = createContext();
 
+// for dev mode
+// const avatarsArr = [
+//   "../../public/avatars/1-avatar.png",
+//   "../../public/avatars/2-avatar.png",
+//   "../../public/avatars/3-avatar.png",
+//   "../../public/avatars/4-avatar.png",
+//   "../../public/avatars/5-avatar.png",
+//   "../../public/avatars/6-avatar.png",
+// ];
+
+// for prod mode
 const avatarsArr = [
-  "../../public/avatars/1-avatar.png",
-  "../../public/avatars/2-avatar.png",
-  "../../public/avatars/3-avatar.png",
-  "../../public/avatars/4-avatar.png",
-  "../../public/avatars/5-avatar.png",
-  "../../public/avatars/6-avatar.png",
+  "/avatars/1-avatar.png",
+  "/public/avatars/2-avatar.png",
+  "/public/avatars/3-avatar.png",
+  "/public/avatars/4-avatar.png",
+  "/public/avatars/5-avatar.png",
+  "/public/avatars/6-avatar.png",
 ];
 
 const makeEmptySlot = (slotId) => ({
