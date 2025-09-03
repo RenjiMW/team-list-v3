@@ -3,11 +3,14 @@ import { useEffect, useState } from "react";
 import SmallButton from "./button-components/SmallButton";
 import { useWindowWidth } from "../hooks/useWindowWidth";
 import playerMenu from "../assets/imgs/tabler_dots.png";
+import backIcon from "../assets/imgs/back-icon.png";
+import ModalError from "./ModalError";
 
 function ReadyPlayer({ player, onAskDelete, onViewDetails }) {
   const { assignToSquad } = usePlayers();
   const { name, avatar } = player;
   const [showStats, setShowStats] = useState(false);
+  const [error, setError] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const width = useWindowWidth();
   const notMobile = width >= 480;
@@ -25,18 +28,27 @@ function ReadyPlayer({ player, onAskDelete, onViewDetails }) {
 
     if (firstPart.length > 10 && spaceIndex !== -1) {
       const onlyPart = firstPart.slice(0, 10) + "...";
-      console.log("1");
       return `${onlyPart}`;
     } else if (nameLenght > 10 && name.includes(" ")) {
       const cutEnd = name.slice(spaceIndex + 1, nameLenght);
       const letter = cutEnd.slice(0, 1);
-      console.log("2");
       return `${firstPart} ${letter}.`;
     } else {
-      console.log("3");
       return nameLenght > 10 ? name.slice(0, 10) + "..." : name;
     }
   };
+
+  function handleAssignToSquad() {
+    setIsOpen(false);
+    const result = assignToSquad(player.id, null);
+
+    if (!result.ok) {
+      console.log("To many players in squad");
+      setError("To many players in squad list.");
+    } else if (result.ok) {
+      setError("");
+    }
+  }
 
   return (
     <div className="flex flex-col border-2 rounded-lg bg-s2 w-full xxs:w-full xs:w-80">
@@ -69,14 +81,12 @@ function ReadyPlayer({ player, onAskDelete, onViewDetails }) {
           <SmallButton player={player} onClick={() => onAskDelete(player)}>
             ❌
           </SmallButton>
-          <SmallButton onClick={() => assignToSquad(player.id, null)}>
-            ▶
-          </SmallButton>
+          <SmallButton onClick={handleAssignToSquad}>▶</SmallButton>
         </div>
 
         <div className="xs:hidden">
           <SmallButton onClick={() => setIsOpen(!isOpen)}>
-            {isOpen ? "↩" : <img src={playerMenu} />}
+            {isOpen ? <img src={backIcon} /> : <img src={playerMenu} />}
           </SmallButton>
         </div>
 
@@ -86,6 +96,7 @@ function ReadyPlayer({ player, onAskDelete, onViewDetails }) {
               onClick={() => {
                 onViewDetails(player), setIsOpen(false);
               }}
+              className="size-9"
             >
               ⚙
             </SmallButton>
@@ -93,6 +104,7 @@ function ReadyPlayer({ player, onAskDelete, onViewDetails }) {
               onClick={() => {
                 setShowStats((prev) => !prev), setIsOpen(false);
               }}
+              className="size-9"
             >
               🔍
             </SmallButton>
@@ -101,48 +113,57 @@ function ReadyPlayer({ player, onAskDelete, onViewDetails }) {
               onClick={() => {
                 onAskDelete(player), setIsOpen(false);
               }}
+              className="size-9"
             >
               ❌
             </SmallButton>
-            <SmallButton
-              onClick={() => {
-                assignToSquad(player.id, null), setIsOpen(false);
-              }}
-            >
+            <SmallButton onClick={handleAssignToSquad} className="size-9">
               ▶
             </SmallButton>
           </div>
         )}
       </div>
       {showStats && (
-        <div className="min-h-8 grid grid-cols-4 xs:flex justify-around">
-          <div className="col-span-2 mr-3">
-            <span>⚖</span>
-            <span>{player.weight ? player.weight : " -- "}</span>
-            <span className="text-xs">kg</span>
+        <div className="min-h-8 grid grid-cols-4 gap-1 xs:flex xs:gap-2 justify-around">
+          <div className="col-span-2">
+            <span className="inline-block w-8">⚖</span>
+            <div className="w-12 inline xs:block">
+              <span>{player.weight ? player.weight : " -- "}</span>
+              <span className="text-xs">kg</span>
+            </div>
           </div>
-          <div className="col-span-2 mr-2">
-            <span>📏</span>
-            <span>{player.height ? player.height : " -- "}</span>
-            <span className="text-xs">cm</span>
+          <div className="col-span-2">
+            <span className="inline-block w-8">📏</span>
+            <div className="w-12 inline xs:block">
+              <span>{player.height ? player.height : " -- "}</span>
+              <span className="text-xs">cm</span>
+            </div>
           </div>
-          <div className="col-span-2 mr-2">
-            <span>⌛</span>
-            <span>{player.age ? player.age : " -- "}</span>
-            <span className="text-xs">yo</span>
+          <div className="col-span-2">
+            <span className="inline-block w-8">⌛</span>
+            <div className="w-12 inline xs:block">
+              <span>{player.age ? player.age : " -- "}</span>
+              <span className="text-xs">yo</span>
+            </div>
           </div>
-          <div className="col-span-2 mr-2">
-            <span>⚔</span>
-            <span>{player.exp ? player.exp : " -- "}</span>
-            <span className="text-xs">mt.</span>
+          <div className="col-span-2">
+            <span className="inline-block w-8">⚔</span>
+            <div className="w-12 inline xs:block">
+              <span>{player.exp ? player.exp : " -- "}</span>
+              <span className="text-xs">MP</span>
+            </div>
           </div>
-          <div className="col-span-4 mr-1">
-            <span>📌</span>
-            <span>{player.pos ? player.pos : " -- "}</span>
-            <span className="text-xs"> #</span>
+          <div className="col-span-4">
+            <span className="inline-block w-8">📌</span>
+            <div className="w-12 inline xs:block">
+              <span>{player.pos ? player.pos : " -- "}</span>
+              <span className="text-xs"> #</span>
+            </div>
           </div>
         </div>
       )}
+
+      {error && <ModalError error={error} setError={setError} />}
     </div>
   );
 }

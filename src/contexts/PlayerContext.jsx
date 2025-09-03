@@ -121,7 +121,9 @@ function reducer(state, action) {
         slotId != null
           ? state.squadPlayers.findIndex((s) => s.slotId === slotId)
           : state.squadPlayers.findIndex((s) => s.occupantId == null);
-      if (sIndex === -1) return state;
+      if (sIndex === -1) {
+        return state;
+      }
 
       // FIXME: tutaj powinna się odpalać akcja wymiany zawodników
       if (state.squadPlayers[sIndex].occupantId) return state;
@@ -283,7 +285,16 @@ function PlayerProvider({ children }) {
   ///////////////////////////////////////
   // ADD TO SQUAD LOGIC
   const assignToSquad = (playerId, slotId) => {
+    const result = state.squadPlayers.every((slot) => {
+      return slot.occupantId !== null;
+    });
+
+    if (result) {
+      return { ok: false, reason: "all occupied" };
+    }
+
     dispatch({ type: "squad/assign", payload: { playerId, slotId } });
+    return { ok: true };
   };
 
   ///////////////////////////////////////

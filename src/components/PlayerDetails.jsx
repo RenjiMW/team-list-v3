@@ -2,6 +2,7 @@ import { useState } from "react";
 import Button from "./button-components/Button";
 import EditPlayer from "./EditPlayer";
 import { usePlayers } from "../hooks/usePlayers";
+import backIcon from "../assets/imgs/back-icon.png";
 
 function PlayerDetails({ player, onCloseViewDetails }) {
   const { availablePlayers } = usePlayers();
@@ -84,7 +85,8 @@ function PlayerDetails({ player, onCloseViewDetails }) {
                 onCloseViewDetails();
               }}
             >
-              Ok ↩
+              Back{" "}
+              <img src={backIcon} alt="Back arrow icon" className="inline" />
             </Button>
           </div>
         </div>

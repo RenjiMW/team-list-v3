@@ -27,7 +27,7 @@ function AddPlayer({ closeModal }) {
       return;
     }
 
-    if (selectedOption === "pick" && !selectedAvatar) {
+    if (selectedOption === "pick" && !selectedAvatar && selectedAvatar !== 0) {
       setError("Select an avatar or use another option");
       return;
     }
@@ -39,7 +39,7 @@ function AddPlayer({ closeModal }) {
       avatarUrl,
     };
 
-    console.log("Adding new player:", newPlayer);
+    // console.log("Adding new player:", newPlayer);
     const result = createPlayer(newPlayer);
 
     if (!result.ok) {
@@ -69,7 +69,7 @@ function AddPlayer({ closeModal }) {
                 <input
                   id="name"
                   type="text"
-                  className="bg-amber-50 xs:ml-1.5 text-black px-1.5"
+                  className="bg-white xs:ml-1.5 text-black px-1.5"
                   onChange={(e) => setName(e.target.value)}
                   value={name}
                 ></input>
@@ -119,18 +119,16 @@ function AddPlayer({ closeModal }) {
 
                 {/* ================= URL INPUT FIELD ================= */}
                 {selectedOption === "urlAddress" && (
-                  <div className="h-15 flex flex-col justify-center items-end">
-                    <div>
-                      <label htmlFor="imageURL">Image URL :</label>
-                      <input
-                        id="imageURL"
-                        type="text"
-                        placeholder=" https://..."
-                        className="bg-amber-50 ml-1.5  text-black px-1.5"
-                        onChange={(e) => setAvatarUrl(e.target.value)}
-                        value={avatarUrl}
-                      ></input>
-                    </div>
+                  <div className="flex flex-col xs:flex-row justify-center w-full xs:w-auto">
+                    <label htmlFor="imageURL">Image URL :</label>
+                    <input
+                      id="imageURL"
+                      type="text"
+                      placeholder=" https://..."
+                      className="bg-white xs:ml-1.5  text-black xs:px-1.5 w-full xs:max-w-48"
+                      onChange={(e) => setAvatarUrl(e.target.value)}
+                      value={avatarUrl}
+                    ></input>
                   </div>
                 )}
               </div>

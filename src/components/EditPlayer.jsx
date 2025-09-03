@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { usePlayers } from "../hooks/usePlayers";
 import Button from "./button-components/Button";
+import backIcon from "../assets/imgs/back-icon.png";
 
 function EditPlayer({ onCloseEdit, player }) {
   const { editPlayer, avatarsArr } = usePlayers();
@@ -171,7 +172,7 @@ function EditPlayer({ onCloseEdit, player }) {
                 type="text"
                 inputMode="numeric"
                 className="bg-sky-50 w-full xs:max-w-50 text-black pl-1"
-                placeholder=" matches qty."
+                placeholder=" matches played"
                 value={curPlayer.exp ?? ""}
                 name="exp"
                 onChange={handleEdit}
@@ -208,7 +209,10 @@ function EditPlayer({ onCloseEdit, player }) {
           {/* Przyciski */}
           <div className="flex flex-wrap justify-center gap-3 sm:gap-6 mt-4">
             <Button type="submit">Save 💾</Button>
-            <Button onClick={onCloseEdit}>Back ↩</Button>
+            <Button onClick={onCloseEdit}>
+              Back{" "}
+              <img src={backIcon} alt="Back arrow icon" className="inline" />
+            </Button>
           </div>
 
           {/* Error */}

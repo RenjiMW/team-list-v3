@@ -10,8 +10,8 @@ function AvailablePlayers({ addPlayer }) {
   const { availablePlayers, deletePlayer } = usePlayers();
   const visibleAvailable = availablePlayers.filter((p) => !p.inSquad);
 
-  console.log(`availablePlayers=`, availablePlayers);
-  console.log(`visibleAvailable=`, visibleAvailable);
+  // console.log(`availablePlayers=`, availablePlayers);
+  // console.log(`visibleAvailable=`, visibleAvailable);
 
   // ================================
   // Delting confirmation logic
