@@ -1,5 +1,6 @@
 import Button from "./button-components/Button";
-import backIcon from "../assets/imgs/back-icon.png";
+import backIcon from "../assets/imgs/back.svg";
+import trashbin from "../assets/imgs/trashbin.svg";
 
 function Approval({ onCancel, onConfirm, playerName }) {
   return (
@@ -10,9 +11,27 @@ function Approval({ onCancel, onConfirm, playerName }) {
           <span className="font-bold">{playerName}</span>?
         </p>
         <div className="flex justify-center gap-10 mt-5">
-          <Button onClick={() => onConfirm()}>Yes ✅</Button>
-          <Button onClick={() => onCancel()}>
-            No <img src={backIcon} className="inline" />
+          <Button
+            onClick={() => onConfirm()}
+            className="flex justify-center w-22"
+          >
+            <span className="ininline-block mr-1">Yes</span>{" "}
+            <img
+              src={trashbin}
+              alt="Back arrow icon"
+              className="inline-block h-6"
+            />
+          </Button>
+          <Button
+            onClick={() => onCancel()}
+            className="flex justify-center w-22"
+          >
+            <span className="ininline-block mr-1">Back</span>{" "}
+            <img
+              src={backIcon}
+              alt="Back arrow icon"
+              className="inline-block h-5"
+            />
           </Button>
         </div>
       </div>

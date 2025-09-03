@@ -4,6 +4,11 @@ import SmallButton from "./button-components/SmallButton";
 import { useWindowWidth } from "../hooks/useWindowWidth";
 import playerMenu from "../assets/imgs/tabler_dots.png";
 import backIcon from "../assets/imgs/back-icon.png";
+import plus from "../assets/imgs/plus.svg";
+import options from "../assets/imgs/options.png";
+import deleteIcon from "../assets/imgs/delete.svg";
+import magnifier from "../assets/imgs/magnifier.svg";
+
 import ModalError from "./ModalError";
 
 function ReadyPlayer({ player, onAskDelete, onViewDetails }) {
@@ -68,20 +73,37 @@ function ReadyPlayer({ player, onAskDelete, onViewDetails }) {
             onClick={() => {
               onViewDetails(player);
             }}
+            className="w-9 h-8 flex justify-center"
           >
-            ⚙
+            <img src={options} alt="Slider symbol - for editing the player" />
           </SmallButton>
           <SmallButton
             onClick={() => {
               setShowStats((prev) => !prev);
             }}
+            className="w-9 h-8 flex justify-center"
           >
-            🔍
+            <img src={magnifier} alt="Magnifier symbol - to view details" />
           </SmallButton>
-          <SmallButton player={player} onClick={() => onAskDelete(player)}>
-            ❌
+          <SmallButton
+            player={player}
+            onClick={() => onAskDelete(player)}
+            className="w-9 h-8 flex justify-center"
+          >
+            <img
+              src={deleteIcon}
+              alt="Delete icon - for deleting player from app"
+            />
           </SmallButton>
-          <SmallButton onClick={handleAssignToSquad}>▶</SmallButton>
+          <SmallButton
+            onClick={handleAssignToSquad}
+            className="w-9 h-8 flex justify-center"
+          >
+            <img
+              src={plus}
+              alt="Plus icon - for assaigning player to squad list"
+            />
+          </SmallButton>
         </div>
 
         <div className="xs:hidden">
@@ -96,29 +118,39 @@ function ReadyPlayer({ player, onAskDelete, onViewDetails }) {
               onClick={() => {
                 onViewDetails(player), setIsOpen(false);
               }}
-              className="size-9"
+              className="w-9 h-8 flex justify-center"
             >
-              ⚙
+              <img src={options} alt="Slider symbol - for editing the player" />
             </SmallButton>
             <SmallButton
               onClick={() => {
                 setShowStats((prev) => !prev), setIsOpen(false);
               }}
-              className="size-9"
+              className="w-9 h-8 flex justify-center"
             >
-              🔍
+              <img src={magnifier} alt="Magnifier symbol - to view details" />
             </SmallButton>
             <SmallButton
               player={player}
               onClick={() => {
                 onAskDelete(player), setIsOpen(false);
               }}
-              className="size-9"
+              className="w-9 h-8 flex justify-center"
             >
-              ❌
+              <img
+                src={deleteIcon}
+                alt="Delete icon - for deleting player from app"
+                className="w-full"
+              />
             </SmallButton>
-            <SmallButton onClick={handleAssignToSquad} className="size-9">
-              ▶
+            <SmallButton
+              onClick={handleAssignToSquad}
+              className="w-9 h-8 flex justify-center"
+            >
+              <img
+                src={plus}
+                alt="Plus icon - for assaigning player to squad list"
+              />
             </SmallButton>
           </div>
         )}

@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { usePlayers } from "../hooks/usePlayers";
 import Button from "./button-components/Button";
-import backIcon from "../assets/imgs/back-icon.png";
+import backIcon from "../assets/imgs/back.svg";
+import saveIcon from "../assets/imgs/save.svg";
 
 function EditPlayer({ onCloseEdit, player }) {
   const { editPlayer, avatarsArr } = usePlayers();
@@ -208,10 +209,21 @@ function EditPlayer({ onCloseEdit, player }) {
 
           {/* Przyciski */}
           <div className="flex flex-wrap justify-center gap-3 sm:gap-6 mt-4">
-            <Button type="submit">Save 💾</Button>
-            <Button onClick={onCloseEdit}>
-              Back{" "}
-              <img src={backIcon} alt="Back arrow icon" className="inline" />
+            <Button type="submit" className="flex justify-center w-22">
+              <span className="ininline-block mr-1">Save</span>{" "}
+              <img
+                src={saveIcon}
+                alt="Save icon"
+                className="inline-block h-6"
+              />
+            </Button>
+            <Button onClick={onCloseEdit} className="flex justify-center w-22">
+              <span className="ininline-block mr-1">Back</span>{" "}
+              <img
+                src={backIcon}
+                alt="Back arrow icon"
+                className="inline-block h-5"
+              />
             </Button>
           </div>
 

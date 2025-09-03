@@ -12,7 +12,7 @@ function FieldList({ handleMouseEnter, handleMouseLeave, highlightPlayer }) {
 
   return (
     <>
-      <div className="min-w-50 flex flex-col sm:mt-8 mb-8 lg:items-baseline ">
+      <div className="min-w-fit flex flex-col sm:mt-8 mb-8 lg:items-baseline ">
         <div className="w-full p-5 rounded-2xl border border-slate-200/70 dark:border-slate-700/70 bg-white/60 dark:bg-slate-900/60 shadow-sm">
           <h3 className="font-bold text-lg">Initaial squad</h3>
           <ul className="flex sm:flex-col gap-10 sm:gap-0">
@@ -99,7 +99,7 @@ function FieldListItem({
       className={`flex text-right ${styleHover} ${circleHover}`}
     >
       <span className="block w-5 mr-3">{number}</span>
-      <span className="block">{player.name}</span>
+      <span className="block text-left">{player.name}</span>
     </li>
   );
 }
