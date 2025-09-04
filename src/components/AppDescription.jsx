@@ -36,15 +36,3 @@ function AppDescription() {
 }
 
 export default AppDescription;
-
-/*
-      <ul className="list-disc pl-8">
-        <li>Add a player's name to the list along with a URL to their photo</li>
-        <li>Manage the display order on the list or remove players</li>
-        <li>Add information about players</li>
-        <li>Move players to the squad and manage positions</li>
-      </ul>
-
-
-            
-*/

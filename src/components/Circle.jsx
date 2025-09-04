@@ -1,9 +1,5 @@
-import { useWindowWidth } from "../hooks/useWindowWidth";
-
 // Circle.jsx
 function Circle({ positionNumber }) {
-  const width = useWindowWidth();
-
   // te same wartości co w ClickArea – w %
   const positionsPercent = [
     { top: 25, left: 18 },
@@ -33,7 +29,6 @@ function Circle({ positionNumber }) {
       : null;
 
   const base =
-    // z-100 w Tailwind nie jest standardem; jeśli chcesz 100, użyj z-[100]
     "absolute z-[100] size-10 border-7 border-sky-400 rounded-4xl -translate-x-1/2 -translate-y-1/2";
 
   return pos ? (

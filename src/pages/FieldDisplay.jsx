@@ -108,7 +108,7 @@ function FiledDisplay() {
             <img
               src={Pitch}
               alt="rugby pitch with players positions showed"
-              className="mt-4 w-80 sm:w-[28rem] md:w-[34rem]" // możesz skalować szerokość breakpointami
+              className="mt-4 w-80 sm:w-[28rem] md:w-[34rem]"
             />
 
             {normalScreen &&

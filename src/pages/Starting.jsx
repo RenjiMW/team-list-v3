@@ -28,12 +28,12 @@ function Starting() {
                 <Link to="/lists">Get started</Link>
               </Button>
             </div>
-            <p className="mt-3">or try</p>
+            {/* <p className="mt-3">or try</p>
             <div className="mt-3">
               <Button className="w-[200px]">
                 <Link to="/lists/lists?demo=1">Demo version</Link>
               </Button>
-            </div>
+            </div> */}
 
             <div className="max-w-md mt-10">
               <AppDescription />
@@ -47,4 +47,4 @@ function Starting() {
 
 export default Starting;
 
-// FIXME: dodać exit demo?
+// FIXME: dodać exit demo
